@@ -5,9 +5,11 @@ import { X } from 'lucide-react'
 
 interface NoteCardProps {
   note: {
+    id: string;
     date: Date;
     content: string;
-  }
+  },
+  onNoteDeleted: (id:string) => void;
 }
 
 export function NoteCard(props: NoteCardProps) {
@@ -49,14 +51,16 @@ export function NoteCard(props: NoteCardProps) {
         <Dialog.Overlay className='inset-0 fixed bg-black/40'>
           <Dialog.Content
             className='fixed
-            left-1/2
-            top-1/2
-            -translate-x-1/2
-            -translate-y-1/2
-            max-w-[640px]
             w-full
-            h-[60vh]
-            rounded-md
+            inset-0
+            md-inset-auto
+            md:left-1/2
+            md:top-1/2
+            md:-translate-x-1/2
+            md:-translate-y-1/2
+            md:max-w-[640px]
+            md:h-[60vh]
+            md:rounded-md
             flex
             flex-col
             outline-none
@@ -84,6 +88,8 @@ export function NoteCard(props: NoteCardProps) {
                 bg-slate-800 
                 text-slate-300
                 group'
+
+                onClick={() => props.onNoteDeleted(props.note.id)}
             >
               Deseja <span className='text-red-400 group-hover:underline'>apagar essa nota</span>?
             </button>
